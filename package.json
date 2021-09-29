@@ -1,6 +1,6 @@
 {
-  "name": "mon-modal",
-  "version": "1.0.0",
+  "name": "@irfanismail/mon-modal",
+  "version": "1.0.1",
   "description": "",
 
   "main": "dist/mon-modal.ssr.js",
