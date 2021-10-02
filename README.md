@@ -2,7 +2,7 @@
 
 MonModal a feature-rich modal Vue2 component. It focuses on bringing the best of Vue's features to achieve common &amp; advanced behavior patterns while giving you the freedom to style the component to your liking. Built-to-work with <a href="https://tailwindcss.com/">TailwindCSS</a>.
 
-![mon-modal-gif](https://github.com/irfancoder/tree/master/asset/mon-modal.gif)
+![mon-modal-gif](https://github.com/irfancoder/mon-modal/blob/master/asset/mon-modal.gif)
 
 [Demo](https://jsfiddle.net/irfancoder/6rcuwbq0/289/)
 <!-- GETTING STARTED -->
