@@ -54,7 +54,7 @@ export default /*#__PURE__*/ {
     <div>
         <!-- Button / Trigger Slot -->
         <slot name="trigger" :open="openModal"></slot>
-        <button v-if="buttonLabel" :class="buttonClass" @click="openModal">{{ buttonLabel }}</button>
+        <button v-if="label" :class="labelClass" @click="openModal">{{ label }}</button>
 
         <!-- Non-Persistent Modal -->
         <transition name="mon-modal" v-if="!persistent">

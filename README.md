@@ -1,5 +1,6 @@
 # mon-modal
 
+## NOT READY FOR PRODUCTION USE. Still under development
 MonModal a feature-rich modal Vue2 component collection. It focuses on bringing the best of Vue's features to achieve common &amp; advanced behavior patterns while giving you the freedom to style the component to your liking. Built-to-work with <a href="https://tailwindcss.com/">TailwindCSS</a>.
 
 This is for the Modal component.
