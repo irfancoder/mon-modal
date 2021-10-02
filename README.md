@@ -68,6 +68,7 @@ props:
   
 ```
 3. Lifecycle Hooks
+
 | Hooks                 | Type          |
 | -------------         |-------------  |
 | before-open           | function      |
