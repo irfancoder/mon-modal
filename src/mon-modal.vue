@@ -33,7 +33,6 @@ export default /*#__PURE__*/ {
 
     methods: {
         openModal() {
-            console.log('open')
             this.$emit('before-open')
             this.show = true
             this.$emit('after-open')
