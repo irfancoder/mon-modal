@@ -2,13 +2,16 @@
 export default /*#__PURE__*/ {
     name: 'MonModal', // vue component name
     props: {
-        title: { type: String, default: 'Modal title' },
-        label: { type: String, default: 'Button text' },
+        title: { type: String, required: false },
+        titleClass: { type: String, required: false, default: 'mon-modal-title' },
+        label: { type: String, required: false },
         labelClass: { type: String, required: false, default: '' },
-        containerClass: { type: String, required: false, default: 'mon-modal-container' },
+        backdropClass: { type: String, required: false, default: 'mon-modal' },
+        modalClass: { type: String, required: false, default: 'mon-modal-container' },
         headerClass: { type: String, required: false, default: 'mon-modal-header' },
         bodyClass: { type: String, required: false, default: 'mon-modal-body' },
         footerClass: { type: String, required: false, default: 'mon-modal-footer' },
+
         persistent: { type: Boolean, required: false, default: false },
         disableClickAway: { type: Boolean, required: false, default: false },
         disableEsc: { type: Boolean, required: false, default: false },
@@ -30,6 +33,7 @@ export default /*#__PURE__*/ {
 
     methods: {
         openModal() {
+            console.log('open')
             this.$emit('before-open')
             this.show = true
             this.$emit('after-open')
@@ -50,27 +54,31 @@ export default /*#__PURE__*/ {
     <div>
         <!-- Button / Trigger Slot -->
         <slot name="trigger" :open="openModal"></slot>
-        <button v-if="!$slots.trigger" :class="labelClass" @click="openModal">{{ label }}</button>
+        <button v-if="buttonLabel" :class="buttonClass" @click="openModal">{{ buttonLabel }}</button>
 
         <!-- Non-Persistent Modal -->
         <transition name="mon-modal" v-if="!persistent">
-            <div class="mon-modal" v-if="show" @click.self="!disableClickAway ? closeModal() : null">
-                <div :class="containerClass">
-                    <div :class="headerClass">
-                        <h4 class="mon-modal-title">{{ title }}</h4>
-                        <button @click="closeModal">X</button>
-                        <slot name="header"></slot>
+            <div :class="backdropClass" v-if="show" @click.self="!disableClickAway ? closeModal() : null">
+                <div :class="modalClass">
+                    <div>
+                        <div v-if="!$scopedSlots.header" :class="headerClass">
+                            <h4 :class="titleClass">{{ title }}</h4>
+                            <button @click="closeModal">X</button>
+                        </div>
+                        <slot v-else name="header" :close="closeModal"></slot>
                     </div>
 
-                    <slot v-if="!!$slots.content" name="content" :open="openModal" :close="closeModal"></slot>
+                    <slot v-if="!!$scopedSlots.custom" name="custom" :open="openModal" :close="closeModal"></slot>
                     <template v-else>
-                        <div :class="bodyClass">
-                            <slot name="body"></slot>
-                        </div>
-                        <div :class="footerClass">
-                            <slot name="footer" :close="closeModal">
-                                <button class="btn btn-default" @click="closeModal">Close</button>
-                            </slot>
+                        <div class="modal-mon-wrapper">
+                            <div :class="bodyClass">
+                                <slot name="body"></slot>
+                            </div>
+                            <div :class="footerClass">
+                                <slot name="footer" :close="closeModal">
+                                    <button class="btn btn-default" @click="closeModal">Close</button>
+                                </slot>
+                            </div>
                         </div>
                     </template>
                 </div>
@@ -79,23 +87,26 @@ export default /*#__PURE__*/ {
 
         <!-- Persistent Modal -->
         <transition name="mon-modal" v-else>
-            <div class="mon-modal" v-show="show" @click.self="!disableClickAway ? closeModal() : null">
-                <div :class="containerClass">
-                    <div :class="headerClass">
-                        <h4 class="mon-modal-title">{{ title }}</h4>
-                        <button @click="closeModal">X</button>
-                        <slot name="header"></slot>
-                    </div>
-
-                    <slot v-if="!!$slots.content" name="content" :open="openModal" :close="closeModal"></slot>
-                    <template v-else>
-                        <div :class="bodyClass">
-                            <slot name="body"></slot>
+            <div :class="backdropClass" v-show="show" @click.self="!disableClickAway ? closeModal() : null">
+                <div :class="modalClass">
+                    <div>
+                        <div v-if="!$scopedSlots.header" :class="headerClass">
+                            <h4 :class="titleClass">{{ title }}</h4>
+                            <button @click="closeModal">X</button>
                         </div>
-                        <div :class="footerClass">
-                            <slot name="footer" :close="closeModal">
-                                <button class="btn btn-default" @click="closeModal">Close</button>
-                            </slot>
+                        <slot v-else name="header" :close="closeModal"></slot>
+                    </div>
+                    <slot v-if="!!$scopedSlots.custom" name="custom" :open="openModal" :close="closeModal"></slot>
+                    <template v-else>
+                        <div class="modal-mon-wrapper">
+                            <div :class="bodyClass">
+                                <slot name="body"></slot>
+                            </div>
+                            <div :class="footerClass">
+                                <slot name="footer" :close="closeModal">
+                                    <button class="btn btn-default" @click="closeModal">Close</button>
+                                </slot>
+                            </div>
                         </div>
                     </template>
                 </div>
@@ -140,6 +151,12 @@ export default /*#__PURE__*/ {
 
 .mon-modal-title {
     margin: 0;
+}
+
+.mon-modal-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .mon-modal-body {

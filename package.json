@@ -1,7 +1,7 @@
 {
   "name": "@irfanismail/mon-modal",
-  "version": "1.0.3",
-  "description": "",
+  "version": "1.0.4",
+  "description": "MonModal is a feature-rich Vue2 modal component. Perfect for Vue developers who wants from simple to advanced control in a modal lifecycle, while also giving the freedom to style the component with CSS libraries like Tailwind. Also can be used to create your own HOC modal component!",
 
   "main": "dist/mon-modal.ssr.js",
   "browser": "dist/mon-modal.esm.js",
