@@ -22,21 +22,27 @@ yarn add @irfanismail/mon-modal
 
 1. Table of Props
 
-| Props                 | Type          | Default               |
-| -------------         |-------------  | :-----------------:   |
-| title                 | string        |                       |
-| label                 | string        |                       |
-| titleClass            | string        | 'mon-modal-title'     |
-| labelClass            | string        |                       |
-| backdropClass         | string        | 'mon-modal'           |
-| modalClass            | string        | 'mon-modal-container' |
-| headerClass           | string        | 'mon-modal-header'    |
-| bodyClass             | string        | 'mon-modal-body'      |
-| footerClass           | string        | 'mon-modal-footer'    |
-| persistent            | boolean       | false                 |
-| disableClickAway      | boolean       | false                 |
-| disableEsc            | boolean       | false                 |
-| openOnMount           | boolean       | false                 |
+| Props                 | Type          | Default                 | Description         |
+| -------------         |-------------  | :-----------------:     | ---------------     |
+| title                 | string        |  -                      | Title of the modal  |
+| label                 | string        |  -                      | Button label for default modal implementation     |
+| titleClass            | string        | 'mon-modal-title'       | Class for title (Tailwind compatible)             |
+| labelClass            | string        |  -                      | Class for button label for default modal implementation (Tailwind compatible)   |
+| backdropClass         | string        | 'mon-modal'             | Class for modal backdrop (Tailwind compatible)    |
+| modalClass            | string        | 'mon-modal-container'   | Class for modal container (Tailwind compatible)   |
+| headerClass           | string        | 'mon-modal-header'      | Class for modal header (Tailwind compatible)      |
+| bodyClass             | string        | 'mon-modal-body'        | Class for modal body (Tailwind compatible)        |
+| footerClass           | string        | 'mon-modal-footer'      | Class for modal footer (Tailwind compatible)      |
+| persistent            | boolean       | false                   | Content rendered inside modal persists even when modal is closed. By default, the content rendered will be destroyed once user closes the modal     |
+| disableClickAway      | boolean       | false                   | Disables modal close behavior when user interacts with out of modal content. By default, modal will close when user clicks away.      |
+| disableEsc            | boolean       | false                   | Disables modal close behavior when user presses `Esc` key. By default, modal will close when user presses `Esc` key.    |
+| openOnMount           | boolean       | false                   | Modal will open on `mounted()`. Refer to Vue's [mounted](https://vuejs.org/v2/api/#mounted) lifecycle for more information      |
+| enter                 | string        | 'mon-modal-enter'       | Custom transition class for modal `enter` phase           |
+| enterActive           | string        | 'mon-modal-enter-active'| Custom transition class for modal `enter-active` phase    |
+| enterTo               | string        | 'mon-modal-enter-to'    | Custom transition class for modal `enter-to` phase        |
+| leave                 | string        | 'mon-modal-leave'       | Custom transition class for modal `leave` phase           |
+| leaveActive           | string        | 'mon-modal-leave-active'| Custom transition class for modal `leave-active` phase    |
+| leaveTo               | boolean       | 'mon-modal-leave-to'    | Custom transition class for modal `leave-to` phase        |
 
 2. Combinations of Slots & Props
 ```
@@ -65,18 +71,43 @@ props:
     <template #body>...</template>
   </mon-modal>
 
-  
+
+<!-- Custom Transition Class -->
+props: 
+ * title
+ * enter
+ * enter-active
+ * enter-to
+ * leave
+ * leave-active
+ * leave-to
+  <mon-modal [...props]>
+   ...
+  </mon-modal>
 ```
-3. Lifecycle Hooks
+3. Component Lifecycle Hooks
 
-| Hooks                 | Type          |
-| -------------         |-------------  |
-| before-open           | function      |
-| after-open            | function      |
-| before-close          | function      |
-| after-close           | function      |
+If you need to do logic based on the modal's lifecycle, you can utilize the predefined hooks given below!
 
+| Hooks                 | Type          | Description                     |
+| -------------         |-------------  | -------------------             |
+| before-open           | function      | Called before the modal opens   |
+| after-open            | function      | Called after the modal opens    |
+| before-close          | function      | Called before the modal closes  |
+| after-close           | function      | Called after modal closes       |
+
+Example Implementation
+```
+<mon-modal 
+    @before-open="..."
+    @after-open="..."
+    @before-close="..."
+    @after-close="...">
+    ...
+</mon-modal>
+```
 Check the [Demo](https://jsfiddle.net/irfancoder/6rcuwbq0/289/) on how to use modal lifecycle hooks
+
 
 5. Handling Modal Behavior outside Usual Scope
 

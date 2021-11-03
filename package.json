@@ -1,19 +1,16 @@
 {
   "name": "@irfanismail/mon-modal",
-  "version": "1.0.7",
-  "description": "MonModal is a feature-rich Vue2 modal component. Perfect for Vue developers who wants from simple to advanced control in a modal lifecycle, while also giving the freedom to style the component with CSS libraries like Tailwind. Also can be used to create your own HOC modal component!",
-
+  "version": "1.0.8",
+  "description": "MonModal is a feature-rich Vue2 modal component. Perfect for Vue developers who wants simple to advanced control in a modal lifecycle, while also giving the freedom to style the component with CSS libraries like Tailwind. Also can be used to create your own HOC modal component!",
   "main": "dist/mon-modal.ssr.js",
   "browser": "dist/mon-modal.esm.js",
   "module": "dist/mon-modal.esm.js",
   "unpkg": "dist/mon-modal.min.js",
-
   "files": [
     "dist/*",
     "src/**/*.vue"
   ],
   "sideEffects": false,
-
   "scripts": {
     "serve": "vue-cli-service serve dev/serve.js",
     "prebuild": "rimraf ./dist",
@@ -22,10 +19,7 @@
     "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format es",
     "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife"
   },
-
-  "dependencies": {
-  },
-
+  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.14.6",
     "@babel/preset-env": "^7.14.7",

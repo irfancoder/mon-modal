@@ -15,7 +15,14 @@ export default /*#__PURE__*/ {
         persistent: { type: Boolean, required: false, default: false },
         disableClickAway: { type: Boolean, required: false, default: false },
         disableEsc: { type: Boolean, required: false, default: false },
-        openOnMount: { type: Boolean, required: false, default: false }
+        openOnMount: { type: Boolean, required: false, default: false },
+
+        enter: { type: String, required: false, default: 'mon-modal-enter' },
+        enterActive: { type: String, required: false, default: 'mon-modal-enter-active' },
+        enterTo: { type: String, required: false, default: 'mon-modal-enter-to' },
+        leave: { type: String, required: false, default: 'mon-modal-leave' },
+        leaveActive: { type: String, required: false, default: 'mon-modal-leave-active' },
+        leaveTo: { type: String, required: false, default: 'mon-modal-leave-to' },
     },
     data() {
         return {
@@ -56,7 +63,15 @@ export default /*#__PURE__*/ {
         <button v-if="label" :class="labelClass" @click="openModal">{{ label }}</button>
 
         <!-- Non-Persistent Modal -->
-        <transition name="mon-modal" v-if="!persistent">
+        <transition 
+            v-if="!persistent"
+            name="mon-modal" 
+            :enter-class="enter"
+            :enter-active-class="enterActive"
+            :enter-to-class="enterTo"
+            :leave-class="leave"
+            :leave-active-class="leaveActive"
+            :leave-to-class="leaveTo">
             <div :class="backdropClass" v-if="show" @click.self="!disableClickAway ? closeModal() : null">
                 <div :class="modalClass">
                     <div>
@@ -85,7 +100,15 @@ export default /*#__PURE__*/ {
         </transition>
 
         <!-- Persistent Modal -->
-        <transition name="mon-modal" v-else>
+        <transition 
+            v-else
+            name="mon-modal"
+            :enter-class="enter"
+            :enter-active-class="enterActive"
+            :enter-to-class="enterTo"
+            :leave-class="leave"
+            :leave-active-class="leaveActive"
+            :leave-to-class="leaveTo">
             <div :class="backdropClass" v-show="show" @click.self="!disableClickAway ? closeModal() : null">
                 <div :class="modalClass">
                     <div>
@@ -115,6 +138,7 @@ export default /*#__PURE__*/ {
 </template>
 
 <style scoped>
+/* BASE */
 .mon-modal {
     position: fixed;
     background: rgba(0, 0, 0, 0.4);
@@ -129,7 +153,7 @@ export default /*#__PURE__*/ {
 
 .mon-modal-container {
     position: absolute;
-    top: 20%;
+    top: 15%;
     background: white;
     width: 90%;
     max-width: 32rem;
@@ -168,5 +192,19 @@ export default /*#__PURE__*/ {
     flex-direction: row;
     justify-content: flex-end;
     padding: 1rem 1.25rem;
+}
+
+/* TRANSITIONS */
+.mon-modal-enter-active, .mon-modal-leave-active {
+    transition: all;
+    transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    transition-duration: 100ms;
+}
+.mon-modal-enter, .mon-modal-leave-to {
+    opacity: 0;
+    transform: translateY(-8px)
+}
+.mon-modal-enter-to, .mon-modal-leave {
+    opacity: 1;
 }
 </style>
