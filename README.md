@@ -12,8 +12,10 @@ MonModal a feature-rich modal Vue2 component. It focuses on bringing the best of
 // npm
 npm i @irfanismail/mon-modal
 
+
 // yarn
 yarn add @irfanismail/mon-modal
+
 ```
 
 
@@ -121,19 +123,11 @@ The two functions are:
 Check the [Demo](https://jsfiddle.net/irfancoder/6rcuwbq0/289/) on how to use modal's internal functions
 
 
-<!-- ROADMAP -->
-## Roadmap 
-
-TODO: 
-- Improve Base styling
-- Add Base Transition Animation
-- Allow Custom Transition Animation
-
 <!-- LICENSE -->
 ## License
-
+[MIT License](https://github.com/irfancoder/mon-modal/blob/master/LICENSE)
 
 <!-- CONTACT -->
-## Contact
+## Author
 
 Irfan Ismail - [@irfancoder](https://twitter.com/irfancoder) - irfan.ismail96@gmail.com
